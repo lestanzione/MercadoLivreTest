@@ -14,6 +14,9 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import javax.inject.Inject;
+
+import br.com.stanzione.mercadolivretest.App;
 import br.com.stanzione.mercadolivretest.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @BindView(R.id.payButton)
     Button payButton;
 
+    @Inject
     MainContract.Presenter presenter;
 
     private NumberFormat nf;
@@ -53,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Mercado Livre");
+        getSupportActionBar().setTitle(R.string.title_main);
 
         nf = NumberFormat.getCurrencyInstance();
         df = (DecimalFormat) nf;
@@ -89,7 +93,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     private void setupPresenter(){
-        presenter = new MainPresenter();
+        ((App) getApplicationContext())
+                .getApplicationComponent()
+                .inject(this);
+
         presenter.attachView(this);
     }
 
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void showInvalidAmountMessage() {
-        Snackbar.make(coordinatorLayout, "Amount should be greater than 0.00", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, R.string.message_invalid_amount, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
