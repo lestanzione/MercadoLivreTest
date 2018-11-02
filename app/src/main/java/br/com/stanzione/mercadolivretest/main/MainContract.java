@@ -7,6 +7,7 @@ public interface MainContract {
 
     interface View extends BaseView {
         void showInvalidAmountMessage();
+        void navigateToPayment(double amount);
     }
 
     interface Presenter extends BasePresenter<View> {

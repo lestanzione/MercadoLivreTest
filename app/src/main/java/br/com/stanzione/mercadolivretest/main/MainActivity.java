@@ -1,5 +1,6 @@
 package br.com.stanzione.mercadolivretest.main;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,9 @@ import java.text.NumberFormat;
 import javax.inject.Inject;
 
 import br.com.stanzione.mercadolivretest.App;
+import br.com.stanzione.mercadolivretest.Configs;
 import br.com.stanzione.mercadolivretest.R;
+import br.com.stanzione.mercadolivretest.payment.PaymentActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -109,6 +112,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public void showInvalidAmountMessage() {
         Snackbar.make(coordinatorLayout, R.string.message_invalid_amount, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void navigateToPayment(double amount) {
+        Intent intent = new Intent(this, PaymentActivity.class);
+        intent.putExtra(Configs.ARG_AMOUNT, amount);
+        startActivity(intent);
     }
 
     @Override
