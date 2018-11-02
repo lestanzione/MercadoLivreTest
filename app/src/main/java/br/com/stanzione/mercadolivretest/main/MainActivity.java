@@ -1,10 +1,13 @@
 package br.com.stanzione.mercadolivretest.main;
 
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -16,7 +19,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainContract.View {
+
+    @BindView(R.id.coordinator)
+    CoordinatorLayout coordinatorLayout;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -26,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.payButton)
     Button payButton;
+
+    MainContract.Presenter presenter;
 
     private NumberFormat nf;
     private DecimalFormat df;
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupUi();
+        setupPresenter();
     }
 
     private void setupUi(){
@@ -79,9 +88,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.payButton)
-    public void payButtonClicked(){
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
+    private void setupPresenter(){
+        presenter = new MainPresenter();
+        presenter.attachView(this);
     }
 
+    @OnClick(R.id.payButton)
+    public void payButtonClicked(){
+        hideKeyboard();
+        presenter.validateAmount(Double.parseDouble(amountEditText.getText().toString()));
+    }
+
+    @Override
+    public void showInvalidAmountMessage() {
+        Snackbar.make(coordinatorLayout, "Amount should be greater than 0.00", Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setProgressBarVisible(boolean visible) {
+
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
 }

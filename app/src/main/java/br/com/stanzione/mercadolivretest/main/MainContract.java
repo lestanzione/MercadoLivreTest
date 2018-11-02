@@ -6,7 +6,7 @@ import br.com.stanzione.mercadolivretest.BaseView;
 public interface MainContract {
 
     interface View extends BaseView {
-        void setInvalidAmountMessage();
+        void showInvalidAmountMessage();
     }
 
     interface Presenter extends BasePresenter<View> {
