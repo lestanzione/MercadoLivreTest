@@ -9,6 +9,9 @@ public class MainPresenter implements MainContract.Presenter {
         if(amount <= 0){
             view.showInvalidAmountMessage();
         }
+        else{
+            view.navigateToPayment(amount);
+        }
     }
 
     @Override

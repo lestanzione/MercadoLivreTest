@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             android:minHeight="?android:attr/actionBarSize"
+
             app:theme="@style/ToolBarStyle">
 
         </android.support.v7.widget.Toolbar>
