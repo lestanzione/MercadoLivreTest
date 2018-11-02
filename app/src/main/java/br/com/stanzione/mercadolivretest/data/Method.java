@@ -8,7 +8,7 @@ public class Method {
     private boolean status;
     private String secureThumbnail;
     private String thumbnail;
-    
+
     public String getId() {
         return id;
     }

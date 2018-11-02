@@ -9,6 +9,7 @@ import dagger.Component;
 @Singleton
 @Component(
         modules = {
+                NetworkModule.class,
                 MainModule.class
         }
 )
