@@ -9,6 +9,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import br.com.stanzione.mercadolivretest.R;
+import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerFragment;
+import br.com.stanzione.mercadolivretest.installment.InstallmentFragment;
+import br.com.stanzione.mercadolivretest.method.MethodFragment;
+import br.com.stanzione.mercadolivretest.payment.adapter.ViewPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -40,6 +44,14 @@ public class PaymentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.title_payment);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addOption(new MethodFragment(), getString(R.string.tab_title_method));
+        adapter.addOption(new CardIssuerFragment(), getString(R.string.tab_title_issuer));
+        adapter.addOption(new InstallmentFragment(), getString(R.string.tab_title_installment));
+        viewPager.setAdapter(adapter);
+
+        tabLayout.setupWithViewPager(viewPager, true);
     }
 
     @Override
