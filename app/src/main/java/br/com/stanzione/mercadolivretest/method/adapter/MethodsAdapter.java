@@ -52,7 +52,7 @@ public class MethodsAdapter extends RecyclerView.Adapter<MethodsAdapter.ViewHold
                 .centerInside()
                 .into(holder.methodLogoImageView);
 
-        holder.constraintLayout.setOnClickListener(view -> listener.onMethodSelected(currentMethod.getPaymentTypeId()));
+        holder.constraintLayout.setOnClickListener(view -> listener.onMethodSelected(currentMethod.getId()));
 
     }
 

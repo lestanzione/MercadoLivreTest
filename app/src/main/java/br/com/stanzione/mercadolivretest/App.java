@@ -2,6 +2,7 @@ package br.com.stanzione.mercadolivretest;
 
 import android.app.Application;
 
+import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerModule;
 import br.com.stanzione.mercadolivretest.di.ApplicationComponent;
 import br.com.stanzione.mercadolivretest.di.DaggerApplicationComponent;
 import br.com.stanzione.mercadolivretest.main.MainModule;
@@ -16,6 +17,7 @@ public class App extends Application {
         applicationComponent = DaggerApplicationComponent.builder()
                 .mainModule(new MainModule())
                 .methodModule(new MethodModule())
+                .cardIssuerModule(new CardIssuerModule())
                 .build();
     }
 

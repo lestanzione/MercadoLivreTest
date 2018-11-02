@@ -10,6 +10,7 @@
     <string name="tab_title_issuer">Issuer</string>
     <string name="tab_title_installment">Installment</string>
     <string name="content_description_method_logo">Method Logo</string>
+    <string name="content_description_card_issuer_logo">Card Issuer Logo</string>
     <string name="message_general_error">We found an error. Please try again later.</string>
     <string name="message_network_error">A network error has occurred. Check your Internet connection and try again later.</string>
 </resources>

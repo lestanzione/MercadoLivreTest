@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import br.com.stanzione.mercadolivretest.R;
 import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerFragment;
+import br.com.stanzione.mercadolivretest.cardissuer.adapter.CardIssuersAdapter;
 import br.com.stanzione.mercadolivretest.installment.InstallmentFragment;
 import br.com.stanzione.mercadolivretest.method.MethodFragment;
 import br.com.stanzione.mercadolivretest.method.adapter.MethodsAdapter;
@@ -20,7 +21,7 @@ import br.com.stanzione.mercadolivretest.payment.adapter.ViewPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PaymentActivity extends AppCompatActivity implements MethodsAdapter.OnMethodSelectedListener {
+public class PaymentActivity extends AppCompatActivity implements MethodsAdapter.OnMethodSelectedListener, CardIssuersAdapter.OnCardIssuerSelectedListener {
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
@@ -39,6 +40,7 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     private InstallmentFragment installmentFragment;
 
     private String methodId;
+    private String cardIssuerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +60,12 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
         methodFragment = new MethodFragment();
         methodFragment.setListener(this);
 
+        cardIssuerFragment = new CardIssuerFragment();
+        cardIssuerFragment.setListener(this);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addOption(methodFragment, getString(R.string.tab_title_method));
-        adapter.addOption(new CardIssuerFragment(), getString(R.string.tab_title_issuer));
+        adapter.addOption(cardIssuerFragment, getString(R.string.tab_title_issuer));
         adapter.addOption(new InstallmentFragment(), getString(R.string.tab_title_installment));
         viewPager.setAdapter(adapter);
 
@@ -106,7 +111,15 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     @Override
     public void onMethodSelected(String methodId) {
         this.methodId = methodId;
+        cardIssuerFragment.setMethodId(methodId);
         tabLayout.setScrollPosition(1,0f,true);
         viewPager.setCurrentItem(1);
+    }
+
+    @Override
+    public void onCardIssuerSelected(String cardIssuerId) {
+        this.cardIssuerId = cardIssuerId;
+        tabLayout.setScrollPosition(2,0f,true);
+        viewPager.setCurrentItem(2);
     }
 }
