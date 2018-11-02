@@ -31,7 +31,8 @@ public class MethodPresenter implements MethodContract.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         this::onMethodsReceived,
-                        this::onFetchMethodsError)
+                        this::onFetchMethodsError
+                )
         );
     }
 

@@ -16,6 +16,6 @@ public class CardIssuerModel implements CardIssuerContract.Model {
 
     @Override
     public Observable<List<CardIssuer>> fetchCardIssuers(String methodId) {
-        return null;
+        return mercadoLivreApi.getCardIssuers(methodId);
     }
 }
