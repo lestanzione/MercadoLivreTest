@@ -17,11 +17,11 @@ public interface InstallmentContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getInstallments();
+        void getInstallments(double amount, String methodId, String cardIssuerId);
     }
 
     interface Model{
-        Observable<InstallmentResponse> fetchInstallments();
+        Observable<List<InstallmentResponse>> fetchInstallments(double amount, String methodId, String cardIssuerId);
     }
 
 }

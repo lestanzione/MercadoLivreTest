@@ -20,7 +20,7 @@ public interface MercadoLivreApi {
     Observable<List<CardIssuer>> getCardIssuers(@Query("payment_method_id") String methodId);
 
     @GET("payment_methods/installments")
-    Observable<InstallmentResponse> getInstallments(
+    Observable<List<InstallmentResponse>> getInstallments(
             @Query("amount") double amount,
             @Query("payment_method_id") String methodId,
             @Query("issuer.id") String issuerId);
