@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import br.com.stanzione.mercadolivretest.R;
 
-public class MethodFragment extends Fragment {
+public class MethodFragment extends Fragment implements MethodContract.View{
 
 
     public MethodFragment() {}
@@ -21,4 +21,18 @@ public class MethodFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_method, container, false);
     }
 
+    @Override
+    public void showNetworkMessage() {
+
+    }
+
+    @Override
+    public void showGeneralMessage() {
+
+    }
+
+    @Override
+    public void setProgressBarVisible(boolean visible) {
+
+    }
 }

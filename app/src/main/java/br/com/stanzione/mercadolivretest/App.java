@@ -5,6 +5,7 @@ import android.app.Application;
 import br.com.stanzione.mercadolivretest.di.ApplicationComponent;
 import br.com.stanzione.mercadolivretest.di.DaggerApplicationComponent;
 import br.com.stanzione.mercadolivretest.main.MainModule;
+import br.com.stanzione.mercadolivretest.method.MethodModule;
 
 public class App extends Application {
 
@@ -14,6 +15,7 @@ public class App extends Application {
         super.onCreate();
         applicationComponent = DaggerApplicationComponent.builder()
                 .mainModule(new MainModule())
+                .methodModule(new MethodModule())
                 .build();
     }
 
