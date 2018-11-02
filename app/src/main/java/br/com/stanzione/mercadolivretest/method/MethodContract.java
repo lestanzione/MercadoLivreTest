@@ -12,6 +12,7 @@ public interface MethodContract {
     interface View extends BaseView{
         void showNetworkMessage();
         void showGeneralMessage();
+        void showMethods(List<Method> methodList);
     }
 
     interface Presenter extends BasePresenter<View>{

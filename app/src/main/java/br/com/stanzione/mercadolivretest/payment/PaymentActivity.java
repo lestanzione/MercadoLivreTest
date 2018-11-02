@@ -15,11 +15,12 @@ import br.com.stanzione.mercadolivretest.R;
 import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerFragment;
 import br.com.stanzione.mercadolivretest.installment.InstallmentFragment;
 import br.com.stanzione.mercadolivretest.method.MethodFragment;
+import br.com.stanzione.mercadolivretest.method.adapter.MethodsAdapter;
 import br.com.stanzione.mercadolivretest.payment.adapter.ViewPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity implements MethodsAdapter.OnMethodSelectedListener {
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
@@ -32,6 +33,12 @@ public class PaymentActivity extends AppCompatActivity {
 
     @BindView(R.id.viewPager)
     ViewPager viewPager;
+
+    private MethodFragment methodFragment;
+    private CardIssuerFragment cardIssuerFragment;
+    private InstallmentFragment installmentFragment;
+
+    private String methodId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,11 @@ public class PaymentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.title_payment);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        methodFragment = new MethodFragment();
+        methodFragment.setListener(this);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addOption(new MethodFragment(), getString(R.string.tab_title_method));
+        adapter.addOption(methodFragment, getString(R.string.tab_title_method));
         adapter.addOption(new CardIssuerFragment(), getString(R.string.tab_title_issuer));
         adapter.addOption(new InstallmentFragment(), getString(R.string.tab_title_installment));
         viewPager.setAdapter(adapter);
@@ -91,5 +101,12 @@ public class PaymentActivity extends AppCompatActivity {
                 return false;
         }
 
+    }
+
+    @Override
+    public void onMethodSelected(String methodId) {
+        this.methodId = methodId;
+        tabLayout.setScrollPosition(1,0f,true);
+        viewPager.setCurrentItem(1);
     }
 }

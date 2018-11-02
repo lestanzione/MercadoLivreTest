@@ -1,12 +1,20 @@
 package br.com.stanzione.mercadolivretest.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Method {
 
+    @SerializedName("id")
     private String id;
+    @SerializedName("name")
     private String name;
+    @SerializedName("payment_type_id")
     private String paymentTypeId;
+    @SerializedName("status")
     private boolean status;
+    @SerializedName("secure_thumbnail")
     private String secureThumbnail;
+    @SerializedName("thumbnail")
     private String thumbnail;
 
     public String getId() {

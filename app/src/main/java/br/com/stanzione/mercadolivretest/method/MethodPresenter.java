@@ -1,9 +1,9 @@
 package br.com.stanzione.mercadolivretest.method;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.stanzione.mercadolivretest.data.Method;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
@@ -22,23 +22,16 @@ public class MethodPresenter implements MethodContract.Presenter {
 
     @Override
     public void getPaymentMethods() {
+
+        view.setProgressBarVisible(true);
+
         compositeDisposable.add(
                 model.fetchPaymentMethods()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Method>>() {
-                               @Override
-                               public void accept(List<Method> methods) throws Exception {
-                                    System.out.println(methods);
-                                    System.out.println(methods.size());
-                               }
-                           },
-                        new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                throwable.printStackTrace();
-                            }
-                        })
+                .subscribe(
+                        this::onMethodsReceived,
+                        this::onFetchMethodsError)
         );
     }
 
@@ -50,5 +43,20 @@ public class MethodPresenter implements MethodContract.Presenter {
     @Override
     public void dispose() {
         compositeDisposable.clear();
+    }
+
+    private void onMethodsReceived(List<Method> methodList){
+        view.setProgressBarVisible(false);
+        view.showMethods(methodList);
+    }
+
+    private void onFetchMethodsError(Throwable throwable) {
+        view.setProgressBarVisible(false);
+        if(throwable instanceof IOException){
+            view.showNetworkMessage();
+        }
+        else{
+            view.showGeneralMessage();
+        }
     }
 }
