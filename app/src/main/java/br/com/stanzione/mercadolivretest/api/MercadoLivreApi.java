@@ -3,6 +3,7 @@ package br.com.stanzione.mercadolivretest.api;
 import java.util.List;
 
 import br.com.stanzione.mercadolivretest.data.CardIssuer;
+import br.com.stanzione.mercadolivretest.data.InstallmentResponse;
 import br.com.stanzione.mercadolivretest.data.Method;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -17,5 +18,11 @@ public interface MercadoLivreApi {
 
     @GET("payment_methods/card_issuers")
     Observable<List<CardIssuer>> getCardIssuers(@Query("payment_method_id") String methodId);
+
+    @GET("payment_methods/installments")
+    Observable<List<InstallmentResponse>> getInstallments(
+            @Query("amount") double amount,
+            @Query("payment_method_id") String methodId,
+            @Query("issuer.id") String issuerId);
 
 }

@@ -5,6 +5,7 @@ import android.app.Application;
 import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerModule;
 import br.com.stanzione.mercadolivretest.di.ApplicationComponent;
 import br.com.stanzione.mercadolivretest.di.DaggerApplicationComponent;
+import br.com.stanzione.mercadolivretest.installment.InstallmentModule;
 import br.com.stanzione.mercadolivretest.main.MainModule;
 import br.com.stanzione.mercadolivretest.method.MethodModule;
 
@@ -18,6 +19,7 @@ public class App extends Application {
                 .mainModule(new MainModule())
                 .methodModule(new MethodModule())
                 .cardIssuerModule(new CardIssuerModule())
+                .installmentModule(new InstallmentModule())
                 .build();
     }
 

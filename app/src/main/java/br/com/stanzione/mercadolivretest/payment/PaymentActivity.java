@@ -11,17 +11,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import br.com.stanzione.mercadolivretest.Configs;
 import br.com.stanzione.mercadolivretest.R;
 import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerFragment;
 import br.com.stanzione.mercadolivretest.cardissuer.adapter.CardIssuersAdapter;
 import br.com.stanzione.mercadolivretest.installment.InstallmentFragment;
+import br.com.stanzione.mercadolivretest.installment.adapter.InstallmentsAdapter;
 import br.com.stanzione.mercadolivretest.method.MethodFragment;
 import br.com.stanzione.mercadolivretest.method.adapter.MethodsAdapter;
 import br.com.stanzione.mercadolivretest.payment.adapter.ViewPagerAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PaymentActivity extends AppCompatActivity implements MethodsAdapter.OnMethodSelectedListener, CardIssuersAdapter.OnCardIssuerSelectedListener {
+public class PaymentActivity extends AppCompatActivity implements MethodsAdapter.OnMethodSelectedListener, CardIssuersAdapter.OnCardIssuerSelectedListener, InstallmentsAdapter.OnInstallmentSelectedListener {
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
@@ -39,6 +41,7 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     private CardIssuerFragment cardIssuerFragment;
     private InstallmentFragment installmentFragment;
 
+    private double amount;
     private String methodId;
     private String cardIssuerId;
 
@@ -46,6 +49,8 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
+
+        amount = getIntent().getDoubleExtra(Configs.ARG_AMOUNT, 0.00);
 
         setupUi();
     }
@@ -63,10 +68,13 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
         cardIssuerFragment = new CardIssuerFragment();
         cardIssuerFragment.setListener(this);
 
+        installmentFragment = new InstallmentFragment();
+        installmentFragment.setListener(this);
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addOption(methodFragment, getString(R.string.tab_title_method));
         adapter.addOption(cardIssuerFragment, getString(R.string.tab_title_issuer));
-        adapter.addOption(new InstallmentFragment(), getString(R.string.tab_title_installment));
+        adapter.addOption(installmentFragment, getString(R.string.tab_title_installment));
         viewPager.setAdapter(adapter);
 
         tabLayout.setupWithViewPager(viewPager, true);
@@ -119,7 +127,15 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     @Override
     public void onCardIssuerSelected(String cardIssuerId) {
         this.cardIssuerId = cardIssuerId;
+        installmentFragment.setAmount(amount);
+        installmentFragment.setMethodId(methodId);
+        installmentFragment.setCardIssuerId(cardIssuerId);
         tabLayout.setScrollPosition(2,0f,true);
         viewPager.setCurrentItem(2);
+    }
+
+    @Override
+    public void onInstallmentSelected(String installment) {
+
     }
 }
