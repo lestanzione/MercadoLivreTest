@@ -1,4 +1,4 @@
-package br.com.stanzione.mercadolivretest;
+package br.com.stanzione.mercadolivretest.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import br.com.stanzione.mercadolivretest.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
