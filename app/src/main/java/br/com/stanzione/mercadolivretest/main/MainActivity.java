@@ -1,6 +1,7 @@
 package br.com.stanzione.mercadolivretest.main;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,12 +21,15 @@ import javax.inject.Inject;
 import br.com.stanzione.mercadolivretest.App;
 import br.com.stanzione.mercadolivretest.Configs;
 import br.com.stanzione.mercadolivretest.R;
+import br.com.stanzione.mercadolivretest.main.dialog.SummaryDialog;
 import br.com.stanzione.mercadolivretest.payment.PaymentActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
+
+    private static final int CODE_OPTIONS = 1;
 
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinatorLayout;
@@ -44,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     private NumberFormat nf;
     private DecimalFormat df;
-
-    private boolean mEditing = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void navigateToPayment(double amount) {
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra(Configs.ARG_AMOUNT, amount);
-        startActivity(intent);
+        startActivityForResult(intent, CODE_OPTIONS);
     }
 
     @Override
@@ -129,5 +131,23 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private void hideKeyboard(){
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CODE_OPTIONS){
+            if(resultCode == RESULT_OK){
+
+                String methodName = data.getStringExtra(Configs.ARG_METHOD);
+                String cardIssuerName = data.getStringExtra(Configs.ARG_CARD_ISSUER);
+                String installment = data.getStringExtra(Configs.ARG_INSTALLMENT);
+
+                SummaryDialog summaryDialog = SummaryDialog.newInstance(methodName, cardIssuerName, installment);
+                summaryDialog.show(getSupportFragmentManager(), SummaryDialog.class.getSimpleName());
+            }
+        }
+
     }
 }
