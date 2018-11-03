@@ -38,6 +38,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class PaymentActivityTest {
@@ -96,6 +97,22 @@ public class PaymentActivityTest {
         methodTabItemSelection();
         cardIssuerTabVerification();
         cardIssuerRecyclerViewVerification();
+    }
+
+    @Test
+    public void withSelectedMethodAndEmptyCardIssuerShouldShowCardIssuerEmptyState() throws IOException, InterruptedException {
+
+        server.enqueue(new MockResponse()
+                .setBody(readFile("methods_response.json")));
+
+        server.enqueue(new MockResponse()
+                .setBody(readFile("empty_card_issuers_response.json")));
+
+        methodTabVerification();
+        methodRecyclerViewVerification();
+        methodTabItemSelection();
+        cardIssuerTabVerification();
+        cardIssuerEmptyStateVerification();
     }
 
     @Test
@@ -296,6 +313,15 @@ public class PaymentActivityTest {
     private void cardIssuerRecyclerViewVerification(){
         onView(withId(R.id.cardIssuersRecyclerView))
                 .check(new RecyclerViewItemCountAssertion(32));
+        onView(withId(R.id.cardIssuerEmptyStateTextView))
+                .check(matches(not(isDisplayed())));
+    }
+
+    private void cardIssuerEmptyStateVerification(){
+        onView(withId(R.id.cardIssuersRecyclerView))
+                .check(new RecyclerViewItemCountAssertion(0));
+        onView(withId(R.id.cardIssuerEmptyStateTextView))
+                .check(matches(isDisplayed()));
     }
 
     private void cardIssuerTabItemSelection() throws InterruptedException {

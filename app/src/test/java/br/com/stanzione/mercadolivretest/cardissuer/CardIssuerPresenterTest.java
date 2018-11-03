@@ -78,7 +78,27 @@ public class CardIssuerPresenterTest {
     }
 
     @Test
-    public void withNetworkShouldShowMethodList() {
+    public void withNoEmptyListShouldShowMethodList() {
+        List<CardIssuer> cardIssuerList = new ArrayList();
+        cardIssuerList.add(new CardIssuer());
+
+        when(mockModel.fetchCardIssuers(anyString())).thenReturn(Observable.just(cardIssuerList));
+
+        presenter.getCardIssuers(methodId);
+
+        verify(mockView, times(1)).setProgressBarVisible(true);
+        verify(mockView, times(1)).setProgressBarVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
+        verify(mockView, times(1)).showCardIssuers(cardIssuerList);
+        verify(mockView, never()).showGeneralMessage();
+        verify(mockView, never()).showNetworkMessage();
+        verify(mockModel, times(1)).fetchCardIssuers(methodId);
+
+    }
+
+    @Test
+    public void withEmptyListShouldShowEmptyState() {
         List<CardIssuer> cardIssuerList = new ArrayList();
 
         when(mockModel.fetchCardIssuers(anyString())).thenReturn(Observable.just(cardIssuerList));
@@ -87,7 +107,9 @@ public class CardIssuerPresenterTest {
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
-        verify(mockView, times(1)).showCardIssuers(cardIssuerList);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(true);
+        verify(mockView, never()).showCardIssuers(anyList());
         verify(mockView, never()).showGeneralMessage();
         verify(mockView, never()).showNetworkMessage();
         verify(mockModel, times(1)).fetchCardIssuers(methodId);
@@ -102,6 +124,8 @@ public class CardIssuerPresenterTest {
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, never()).showCardIssuers(anyList());
         verify(mockView, never()).showGeneralMessage();
         verify(mockView, times(1)).showNetworkMessage();
@@ -117,6 +141,8 @@ public class CardIssuerPresenterTest {
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
+        verify(mockView, times(1)).setEmptyStateVisible(false);
+        verify(mockView, never()).setEmptyStateVisible(true);
         verify(mockView, never()).showCardIssuers(anyList());
         verify(mockView, times(1)).showGeneralMessage();
         verify(mockView, never()).showNetworkMessage();

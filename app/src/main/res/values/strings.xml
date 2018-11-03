@@ -17,4 +17,5 @@
     <string name="dialog_payment_method">Payment Method</string>
     <string name="dialog_card_issuer">Card Issuer</string>
     <string name="dialog_installment">Installment</string>
+    <string name="empty_state_card_issuer">There is no options here</string>
 </resources>
