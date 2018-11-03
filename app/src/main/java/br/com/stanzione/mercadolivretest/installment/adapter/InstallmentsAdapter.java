@@ -57,6 +57,10 @@ public class InstallmentsAdapter extends RecyclerView.Adapter<InstallmentsAdapte
         notifyDataSetChanged();
     }
 
+    public void setListener(OnInstallmentSelectedListener listener){
+        this.listener = listener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.constraintLayout)

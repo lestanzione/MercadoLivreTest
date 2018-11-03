@@ -129,6 +129,9 @@ public class MethodFragment extends Fragment implements MethodContract.View {
 
     public void setListener(MethodsAdapter.OnMethodSelectedListener listener){
         this.listener = listener;
+        if(null != methodsAdapter){
+            methodsAdapter.setListener(listener);
+        }
     }
 
 }
