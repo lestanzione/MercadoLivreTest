@@ -12,7 +12,7 @@
         android:id="@+id/cardIssuersRecyclerView"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
         app:spanCount="2"
-        tools:listitem="@layout/row_method" />
+        tools:listitem="@layout/row_card_issuer" />
 
     <ProgressBar
         android:layout_width="wrap_content"

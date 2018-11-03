@@ -18,4 +18,5 @@
     <string name="dialog_card_issuer">Card Issuer</string>
     <string name="dialog_installment">Installment</string>
     <string name="empty_state_card_issuer">There is no options here</string>
+    <string name="button_pay">Pay</string>
 </resources>
