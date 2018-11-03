@@ -66,6 +66,10 @@ public class MethodsAdapter extends RecyclerView.Adapter<MethodsAdapter.ViewHold
         notifyDataSetChanged();
     }
 
+    public void setListener(OnMethodSelectedListener listener){
+        this.listener = listener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.constraintLayout)

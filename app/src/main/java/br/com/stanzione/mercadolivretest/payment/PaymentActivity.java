@@ -57,7 +57,25 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
         amount = getIntent().getDoubleExtra(Configs.ARG_AMOUNT, 0.00);
 
+        if(savedInstanceState != null) {
+            this.amount = savedInstanceState.getDouble(Configs.SAVED_AMOUNT);
+            this.methodId = savedInstanceState.getString(Configs.SAVED_METHOD);
+            this.methodName = savedInstanceState.getString(Configs.SAVED_METHOD_NAME);
+            this.cardIssuerId = savedInstanceState.getString(Configs.SAVED_CARD_ISSUER);
+            this.cardIssuerName = savedInstanceState.getString(Configs.SAVED_CARD_ISSUER_NAME);
+        }
+
         setupUi();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(Configs.SAVED_AMOUNT, amount);
+        outState.putSerializable(Configs.SAVED_METHOD, methodId);
+        outState.putSerializable(Configs.SAVED_METHOD_NAME, methodName);
+        outState.putSerializable(Configs.SAVED_CARD_ISSUER, cardIssuerId);
+        outState.putSerializable(Configs.SAVED_CARD_ISSUER_NAME, cardIssuerName);
     }
 
     private void setupUi(){
@@ -67,15 +85,31 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
         getSupportActionBar().setTitle(R.string.title_payment);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        methodFragment = new MethodFragment();
+
+        methodFragment = (MethodFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":0");
+        cardIssuerFragment = (CardIssuerFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":1");
+        installmentFragment = (InstallmentFragment) getSupportFragmentManager().findFragmentByTag("android:switcher:" + R.id.viewPager + ":2");
+
+        if(null == methodFragment){
+            methodFragment = new MethodFragment();
+        }
+        if(null == cardIssuerFragment){
+            cardIssuerFragment = new CardIssuerFragment();
+        }
+        if(null == installmentFragment){
+            installmentFragment = new InstallmentFragment();
+        }
+
         methodFragment.setListener(this);
         methodFragment.setAmount(amount);
 
-        cardIssuerFragment = new CardIssuerFragment();
         cardIssuerFragment.setListener(this);
+        cardIssuerFragment.setMethodId(methodId);
 
-        installmentFragment = new InstallmentFragment();
         installmentFragment.setListener(this);
+        installmentFragment.setAmount(amount);
+        installmentFragment.setMethodId(methodId);
+        installmentFragment.setCardIssuerId(cardIssuerId);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addOption(methodFragment, getString(R.string.tab_title_method));
@@ -91,22 +125,10 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     private void disableTabLayoutAndViewPager() {
         LinearLayout tabStrip = ((LinearLayout) tabLayout.getChildAt(0));
         for(int i = 0; i < tabStrip.getChildCount(); i++) {
-            tabStrip.getChildAt(i).setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
+            tabStrip.getChildAt(i).setOnTouchListener((v, event) -> true);
         }
 
-        viewPager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                return true;
-            }
-        });
+        viewPager.setOnTouchListener((v, event) -> true);
     }
 
     @Override

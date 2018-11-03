@@ -66,6 +66,10 @@ public class CardIssuersAdapter extends RecyclerView.Adapter<CardIssuersAdapter.
         notifyDataSetChanged();
     }
 
+    public void setListener(OnCardIssuerSelectedListener listener){
+        this.listener = listener;
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.constraintLayout)

@@ -139,5 +139,8 @@ public class InstallmentFragment extends Fragment implements InstallmentContract
 
     public void setListener(InstallmentsAdapter.OnInstallmentSelectedListener listener){
         this.listener = listener;
+        if(null != installmentsAdapter){
+            installmentsAdapter.setListener(listener);
+        }
     }
 }

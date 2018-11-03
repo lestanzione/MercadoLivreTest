@@ -141,5 +141,8 @@ public class CardIssuerFragment extends Fragment implements CardIssuerContract.V
 
     public void setListener(CardIssuersAdapter.OnCardIssuerSelectedListener listener){
         this.listener = listener;
+        if(null != cardIssuersAdapter){
+            cardIssuersAdapter.setListener(listener);
+        }
     }
 }
