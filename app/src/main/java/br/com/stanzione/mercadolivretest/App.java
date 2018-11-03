@@ -1,6 +1,7 @@
 package br.com.stanzione.mercadolivretest;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import br.com.stanzione.mercadolivretest.cardissuer.CardIssuerModule;
 import br.com.stanzione.mercadolivretest.di.ApplicationComponent;
@@ -25,5 +26,10 @@ public class App extends Application {
 
     public ApplicationComponent getApplicationComponent() {
         return applicationComponent;
+    }
+
+    @VisibleForTesting
+    public void setApplicationComponent(ApplicationComponent applicationComponent){
+        this.applicationComponent = applicationComponent;
     }
 }
