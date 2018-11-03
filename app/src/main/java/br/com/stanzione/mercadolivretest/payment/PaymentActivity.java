@@ -69,6 +69,7 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
         methodFragment = new MethodFragment();
         methodFragment.setListener(this);
+        methodFragment.setAmount(amount);
 
         cardIssuerFragment = new CardIssuerFragment();
         cardIssuerFragment.setListener(this);
