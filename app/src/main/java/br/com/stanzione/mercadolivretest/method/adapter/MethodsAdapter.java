@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 public class MethodsAdapter extends RecyclerView.Adapter<MethodsAdapter.ViewHolder> {
 
     public interface OnMethodSelectedListener {
-        void onMethodSelected(String methodId);
+        void onMethodSelected(String methodId, String methodName);
     }
 
     private Context context;
@@ -52,7 +52,7 @@ public class MethodsAdapter extends RecyclerView.Adapter<MethodsAdapter.ViewHold
                 .centerInside()
                 .into(holder.methodLogoImageView);
 
-        holder.constraintLayout.setOnClickListener(view -> listener.onMethodSelected(currentMethod.getId()));
+        holder.constraintLayout.setOnClickListener(view -> listener.onMethodSelected(currentMethod.getId(), currentMethod.getName()));
 
     }
 

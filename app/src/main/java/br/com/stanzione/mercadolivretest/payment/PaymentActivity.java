@@ -1,5 +1,7 @@
 package br.com.stanzione.mercadolivretest.payment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -43,7 +45,10 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
     private double amount;
     private String methodId;
+    private String methodName;
     private String cardIssuerId;
+    private String cardIssuerName;
+    private String installment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,16 +122,18 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
     }
 
     @Override
-    public void onMethodSelected(String methodId) {
+    public void onMethodSelected(String methodId, String methodName) {
         this.methodId = methodId;
+        this.methodName = methodName;
         cardIssuerFragment.setMethodId(methodId);
         tabLayout.setScrollPosition(1,0f,true);
         viewPager.setCurrentItem(1);
     }
 
     @Override
-    public void onCardIssuerSelected(String cardIssuerId) {
+    public void onCardIssuerSelected(String cardIssuerId, String cardIssuerName) {
         this.cardIssuerId = cardIssuerId;
+        this.cardIssuerName = cardIssuerName;
         installmentFragment.setAmount(amount);
         installmentFragment.setMethodId(methodId);
         installmentFragment.setCardIssuerId(cardIssuerId);
@@ -136,6 +143,13 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
     @Override
     public void onInstallmentSelected(String installment) {
+        this.installment = installment;
 
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra(Configs.ARG_METHOD, methodName);
+        returnIntent.putExtra(Configs.ARG_CARD_ISSUER, cardIssuerName);
+        returnIntent.putExtra(Configs.ARG_INSTALLMENT, installment);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 }

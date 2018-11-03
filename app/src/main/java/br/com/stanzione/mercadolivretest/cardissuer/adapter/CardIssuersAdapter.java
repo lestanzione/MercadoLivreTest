@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 public class CardIssuersAdapter extends RecyclerView.Adapter<CardIssuersAdapter.ViewHolder> {
 
     public interface OnCardIssuerSelectedListener {
-        void onCardIssuerSelected(String cardIssuerId);
+        void onCardIssuerSelected(String cardIssuerId, String cardIssuerName);
     }
 
     private Context context;
@@ -52,7 +52,7 @@ public class CardIssuersAdapter extends RecyclerView.Adapter<CardIssuersAdapter.
                 .centerInside()
                 .into(holder.cardIssuerLogoImageView);
 
-        holder.constraintLayout.setOnClickListener(view -> listener.onCardIssuerSelected(currentCardIssuer.getId()));
+        holder.constraintLayout.setOnClickListener(view -> listener.onCardIssuerSelected(currentCardIssuer.getId(), currentCardIssuer.getName()));
 
     }
 
