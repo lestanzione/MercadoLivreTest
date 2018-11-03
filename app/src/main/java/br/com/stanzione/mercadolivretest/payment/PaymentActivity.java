@@ -113,6 +113,7 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
         switch(item.getItemId()){
             case android.R.id.home:
+                setResult(Activity.RESULT_CANCELED);
                 finish();
                 return true;
             default:
