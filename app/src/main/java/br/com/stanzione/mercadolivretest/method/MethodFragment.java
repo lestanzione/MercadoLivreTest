@@ -37,12 +37,17 @@ public class MethodFragment extends Fragment implements MethodContract.View {
     private MethodsAdapter methodsAdapter;
     private List<Method> methodList;
 
+    private double amount;
+
     private Boolean isStarted = false;
     private Boolean isVisible = false;
 
 
     public MethodFragment() {}
 
+    public void setAmount(double amount){
+        this.amount = amount;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,7 +68,7 @@ public class MethodFragment extends Fragment implements MethodContract.View {
         super.onStart();
         isStarted = true;
         if (isVisible) {
-            presenter.getPaymentMethods();
+            presenter.getPaymentMethods(amount);
         }
     }
 
@@ -72,7 +77,7 @@ public class MethodFragment extends Fragment implements MethodContract.View {
         super.setUserVisibleHint(isVisibleToUser);
         isVisible = isVisibleToUser;
         if (isVisible && isStarted) {
-            presenter.getPaymentMethods();
+            presenter.getPaymentMethods(amount);
         }
     }
 

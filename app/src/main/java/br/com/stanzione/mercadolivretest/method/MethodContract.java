@@ -16,7 +16,7 @@ public interface MethodContract {
     }
 
     interface Presenter extends BasePresenter<View>{
-        void getPaymentMethods();
+        void getPaymentMethods(double amount);
     }
 
     interface Model{

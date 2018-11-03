@@ -21,6 +21,7 @@ import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -80,7 +81,7 @@ public class MethodPresenterTest {
 
         when(mockModel.fetchPaymentMethods()).thenReturn(Observable.just(methodList));
 
-        presenter.getPaymentMethods();
+        presenter.getPaymentMethods(anyDouble());
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
@@ -95,7 +96,7 @@ public class MethodPresenterTest {
     public void withNoNetworkShouldShowNetworkMessage() {
         when(mockModel.fetchPaymentMethods()).thenReturn(Observable.error(new IOException()));
 
-        presenter.getPaymentMethods();
+        presenter.getPaymentMethods(anyDouble());
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
@@ -110,7 +111,7 @@ public class MethodPresenterTest {
     public void withGeneralErrorShouldShowGeneralMessage() {
         when(mockModel.fetchPaymentMethods()).thenReturn(Observable.error(new Throwable()));
 
-        presenter.getPaymentMethods();
+        presenter.getPaymentMethods(anyDouble());
 
         verify(mockView, times(1)).setProgressBarVisible(true);
         verify(mockView, times(1)).setProgressBarVisible(false);
