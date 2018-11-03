@@ -113,6 +113,7 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
 
         switch(item.getItemId()){
             case android.R.id.home:
+                setResult(Activity.RESULT_CANCELED);
                 finish();
                 return true;
             default:
@@ -152,4 +153,15 @@ public class PaymentActivity extends AppCompatActivity implements MethodsAdapter
         setResult(Activity.RESULT_OK, returnIntent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (viewPager.getCurrentItem() != 0) {
+            viewPager.setCurrentItem(viewPager.getCurrentItem() - 1,true);
+        }else{
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+        }
+    }
+
 }
