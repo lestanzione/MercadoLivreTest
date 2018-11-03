@@ -16,6 +16,10 @@ public class Method {
     private String secureThumbnail;
     @SerializedName("thumbnail")
     private String thumbnail;
+    @SerializedName("min_allowed_amount")
+    private double minAmount;
+    @SerializedName("max_allowed_amount")
+    private double maxAmount;
 
     public String getId() {
         return id;
@@ -63,5 +67,21 @@ public class Method {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public double getMinAmount() {
+        return minAmount;
+    }
+
+    public void setMinAmount(double minAmount) {
+        this.minAmount = minAmount;
+    }
+
+    public double getMaxAmount() {
+        return maxAmount;
+    }
+
+    public void setMaxAmount(double maxAmount) {
+        this.maxAmount = maxAmount;
     }
 }
