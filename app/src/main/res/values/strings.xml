@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MercadoLivreTest</string>
+    <string name="title_main">Mercado Livre</string>
+    <string name="title_payment">Payment</string>
+    <string name="tab_title_method">1. Method</string>
+    <string name="tab_title_issuer">2. Issuer</string>
+    <string name="tab_title_installment">3. Installment</string>
+    <string name="content_description_method_logo">Method Logo</string>
+    <string name="content_description_card_issuer_logo">Card Issuer Logo</string>
+    <string name="message_invalid_amount">Amount should be greater than 0.00</string>
+    <string name="message_general_error">We found an error. Please try again later.</string>
+    <string name="message_network_error">A network error has occurred. Check your Internet connection and try again later.</string>
+    <string name="dialog_title_summary">Summary</string>
+    <string name="dialog_payment_method">Payment Method</string>
+    <string name="dialog_card_issuer">Card Issuer</string>
+    <string name="dialog_installment">Installment</string>
+    <string name="empty_state_card_issuer">There is no options here</string>
+    <string name="button_pay">Pay</string>
+</resources>

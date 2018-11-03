@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_dialog">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryTitleTextView"
+        android:text="@string/dialog_title_summary"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryMethodLabelTextView"
+        android:text="@string/dialog_payment_method"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toBottomOf="@id/summaryTitleTextView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryMethodTextView"
+        android:textColor="@color/colorSecondaryText"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/summaryMethodLabelTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Payment Method"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryCardIssuerLabelTextView"
+        android:text="@string/dialog_card_issuer"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/summaryMethodTextView"
+        app:layout_constraintStart_toStartOf="@id/summaryMethodLabelTextView"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryCardIssuerTextView"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintTop_toBottomOf="@id/summaryCardIssuerLabelTextView"
+        app:layout_constraintEnd_toEndOf="@id/summaryMethodTextView"
+        tools:text="Card Issuer"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/summaryInstallmentTextView"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/summaryCardIssuerTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Installment"/>
+
+</android.support.constraint.ConstraintLayout>
