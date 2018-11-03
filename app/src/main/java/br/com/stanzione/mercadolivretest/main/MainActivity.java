@@ -108,7 +108,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @OnClick(R.id.payButton)
     public void payButtonClicked(){
         hideKeyboard();
-        presenter.validateAmount(Double.parseDouble(amountEditText.getText().toString()));
+        String amountText = amountEditText.getText().toString();
+        amountText = amountText.replaceAll(",", "");
+        presenter.validateAmount(Double.parseDouble(amountText));
     }
 
     @Override
