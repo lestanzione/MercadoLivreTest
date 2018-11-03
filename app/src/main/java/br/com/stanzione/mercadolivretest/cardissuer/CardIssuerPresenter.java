@@ -24,6 +24,7 @@ public class CardIssuerPresenter implements CardIssuerContract.Presenter {
     public void getCardIssuers(String methodId) {
 
         view.setProgressBarVisible(true);
+        view.setEmptyStateVisible(false);
 
         compositeDisposable.add(
                 model.fetchCardIssuers(methodId)
@@ -48,7 +49,12 @@ public class CardIssuerPresenter implements CardIssuerContract.Presenter {
 
     private void onCardIssuersReceived(List<CardIssuer> cardIssuerList){
         view.setProgressBarVisible(false);
-        view.showCardIssuers(cardIssuerList);
+        if(cardIssuerList.isEmpty()){
+            view.setEmptyStateVisible(true);
+        }
+        else {
+            view.showCardIssuers(cardIssuerList);
+        }
     }
 
     private void onFetchCardIssuersError(Throwable throwable) {

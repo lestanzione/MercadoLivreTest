@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class CardIssuerFragment extends Fragment implements CardIssuerContract.V
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+
+    @BindView(R.id.cardIssuerEmptyStateTextView)
+    TextView cardIssuerEmptyStateTextView;
 
     @Inject
     CardIssuerContract.Presenter presenter;
@@ -115,6 +119,15 @@ public class CardIssuerFragment extends Fragment implements CardIssuerContract.V
     public void showCardIssuers(List<CardIssuer> cardIssuerList) {
         this.cardIssuerList = cardIssuerList;
         cardIssuersAdapter.setItems(cardIssuerList);
+    }
+
+    @Override
+    public void setEmptyStateVisible(boolean visible) {
+        if (visible) {
+            cardIssuerEmptyStateTextView.setVisibility(View.VISIBLE);
+        } else {
+            cardIssuerEmptyStateTextView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override

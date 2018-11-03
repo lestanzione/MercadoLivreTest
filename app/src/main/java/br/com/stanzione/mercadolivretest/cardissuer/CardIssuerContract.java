@@ -13,6 +13,7 @@ public interface CardIssuerContract {
         void showNetworkMessage();
         void showGeneralMessage();
         void showCardIssuers(List<CardIssuer> cardIssuerList);
+        void setEmptyStateVisible(boolean visible);
     }
 
     interface Presenter extends BasePresenter<View> {
