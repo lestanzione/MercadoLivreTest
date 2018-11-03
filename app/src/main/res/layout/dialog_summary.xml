@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/summaryMethodLabelTextView"
         android:text="@string/dialog_payment_method"
-        android:textColor="@color/colorSecondaryText"
-        android:layout_marginTop="16dp"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginTop="32dp"
         android:layout_marginStart="16dp"
         app:layout_constraintTop_toBottomOf="@id/summaryTitleTextView"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -37,10 +37,8 @@
         android:id="@+id/summaryMethodTextView"
         android:text="Payment Method"
         android:textColor="@color/colorSecondaryText"
-        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toTopOf="@id/summaryMethodLabelTextView"
-        app:layout_constraintStart_toEndOf="@id/summaryMethodLabelTextView"
+        app:layout_constraintTop_toBottomOf="@id/summaryMethodLabelTextView"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
@@ -48,9 +46,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/summaryCardIssuerLabelTextView"
         android:text="@string/dialog_card_issuer"
-        android:textColor="@color/colorSecondaryText"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/summaryMethodLabelTextView"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@id/summaryMethodTextView"
         app:layout_constraintStart_toStartOf="@id/summaryMethodLabelTextView"/>
 
     <TextView
@@ -59,34 +57,23 @@
         android:id="@+id/summaryCardIssuerTextView"
         android:text="Card Issuer"
         android:textColor="@color/colorSecondaryText"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/summaryMethodTextView"
-        app:layout_constraintStart_toStartOf="@id/summaryMethodTextView"
-        app:layout_constraintEnd_toEndOf="@id/summaryMethodTextView"/>
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/summaryInstallmentLabelTextView"
-        android:text="@string/dialog_installment"
-        android:textColor="@color/colorSecondaryText"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         app:layout_constraintTop_toBottomOf="@id/summaryCardIssuerLabelTextView"
-        app:layout_constraintStart_toStartOf="@id/summaryCardIssuerLabelTextView"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintEnd_toEndOf="@id/summaryMethodTextView"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/summaryInstallmentTextView"
         android:text="Installment"
-        android:textColor="@color/colorSecondaryText"
-        android:layout_marginTop="16dp"
+        android:textColor="@color/colorPrimaryText"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintTop_toBottomOf="@id/summaryCardIssuerTextView"
-        app:layout_constraintStart_toStartOf="@id/summaryCardIssuerTextView"
-        app:layout_constraintEnd_toEndOf="@id/summaryMethodTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>
